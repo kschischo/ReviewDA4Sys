@@ -1,0 +1,207 @@
+\documentclass[hidelinks,11pt]{article}
+\usepackage[top=0.7in,left=0.75in,right=0.75in,footskip=0.7in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[utf8x]{inputenc}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage[switch]{lineno}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{rotating}
+\newcommand\tabrotate[1]{\begin{turn}{90}\rlap{#1}\end{turn}}
+\usepackage{subscript}
+
+
+\renewcommand{\vec}[1]{{\mbox{\mathversion{bold}\ensuremath{#1}}}}
+
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,singlelinecheck=off]{caption}
+
+\bibliographystyle{vancouver}
+
+\date{}
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+\usepackage[normalem]{ulem}
+\newcommand{\benny}[1]{\textcolor{blue}{{#1}}}
+\newcommand{\maik}[1]{\textcolor{green}{{#1}}}
+\newcommand{\rem}[1]{\textcolor{red}{\sout{#1}}}
+
+\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{27.023pt}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\addtolength{\columnwidth}{0.34in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Own commands
+
+
+
+\begin{document}
+
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+
+\begin{flushleft}
+{\Large\textbf{Data Assimilation for Systems and Mathematical Biology} 
+}
+\newline
+
+Engelhardt Benjamin	\textsuperscript{1,2,*},
+Kahl Dominik\textsuperscript{3},
+Weber Andreas\textsuperscript{4},
+Kschischo Maik\textsuperscript{3,*}
+\\
+\bigskip
+\textbf{1} Rheinische Friedrich-Wilhelms-Universit\"at Bonn, Algorithmic Bioinformatics, Bonn, Germany
+\\
+\textbf{2} Current Address: AbbVie Deutschland GmbH {\&} Co. KG, Ludwigshafen, Germany
+\\
+\textbf{3} University of Applied Sciences Koblenz, RheinAhrCampus, Department
+of Mathematics and Technology, Remagen, Germany
+\\
+\textbf{4} Rheinische Friedrich-Wilhelms-Universit\"at Bonn, Institute for Computer Science, Bonn, Germany
+\\
+ \bigskip
+*Authors for correspondence: engelhar@bit.uni-bonn.de and kschischo@rheinahrcampus.de
+
+\end{flushleft}
+
+\section*{Abstract}
+Mathematical models are increasingly used as a tool to deal with
+the tremendous complexity of biological systems. Data Assimilation, defined as the process of combining models with experimental observations, is a key step in order to better align the model outputs with reality. Despite new and improved experimental techniques, it is usually impossible to directly observe all the states of a biological system. This renders Data Assimilation an inverse problem requiring sophisticated mathematical and statistical techniques  and the systematic integration of prior knowledge or assumptions.
+\vspace*{2cm}
+  \end{@twocolumnfalse}
+]
+
+\section{Introduction}
+\section{The Data Assimilation problem}
+
+\section{Outlook} 
+
+\begin{align*}	
+\dot{\vec{x}} =&  \underbrace{\left(\begin{array}{c}
+k_{t} B_{max} - k_t x_1 - k_{on} x_1 x_2+k_{off} x_3+k_{ex} x_4 \\ 
+-k_{on} x_1 x_2+k_{off} x_3+k_{ex} x_4\\ 
+k_{on} x_1 x_2-k_{off} x_3- k_e x_3\\ 
+k_e x_3-k_{ex} x_4-k_{di} x_4-k_{de} x_4\\ 
+k_{di} x_4\\ 
+k_{de} x_4 \\ 
+\end{array} \right)}_{\vec{f} \left( \vec{x} \right)}\\
+%
+\vec{y} 		  =& \underbrace{\left(\begin{array}{c}
+\kappa_1 \left({x}_2 +2{x}_6\right)\\
+\kappa_2\left({x}_3\right)\\
+\kappa_3\left({x}_4 +{x}_5\right)
+\end{array} \right)}_{\vec{h}\left(\vec{x}\right)}
+\end{align*}
+%
+
+\begin{align*}	
+x_1:& \,\text{EpoR}\\
+x_2:& \,\text{Epo}\\
+x_3:& \,\text{Epo-EpoR}\\
+x_4:& \,\text{Epo-EpoR}_i\\
+x_5:& \,\text{dEpo}_i \\
+x_6:& \,\text{dEpo}_e 
+\end{align*}
+
+\begin{align*}	
+y_1: & \,\text{Epo + dEpo}_i\\
+y_2: & \,\text{Epo-EpoR} \\
+y_3: & \,\text{Epo-EpoR}_i + \text{dEpo}_i\\
+\end{align*}
+
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+$x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ \\ 
+\hline 
+$\text{EpoR}$ & $\text{Epo}$  & $\text{Epo-EpoR}$ & $\text{Epo-EpoR}_i$ & $\text{dEpo}_i$&  $\text{dEpo}_e$ \\ 
+\hline 
+\end{tabular} 
+
+\vspace{1cm}
+
+\begin{tabular}{|c|c|c|}
+\hline 
+$y_1$ & $y_2$ & $y_3$\\ 
+\hline 
+$\text{Epo + dEpo}_i$ & $\text{Epo-EpoR}$ & $\text{Epo-EpoR}_i + \text{dEpo}_i$ \\ 
+\hline 
+\end{tabular} 
+
+
+
+
+\newpage\newpage
+
+
+To illustrate different aspects of DA we will use a model for the information processing at the erythropoietin (Epo) receptor (EpoR) as a running example~\cite{becker_covering_2010}. The state $\vec{x}=(x_1,\ldots,x_6)^T$ of this model is given by the concentrations of the Epo receptor ($x_1$) on the cell surface 
+which can bind to Epo ($x_2$) and build the ligand-receptor complex ($x_3$). This complex is able to activate subsequent signaling cascades, e.g. the JAK-STAT signaling pathway. In addition the ligand-receptor complex can be internalized ($x_4$) and dissociate from Epo which then is degraded ($x_5$) and transported to the extracellular space ($x_5$). 
+\begin{eqnarray*}
+\dot{{x}}_1 &=& k_{t} B_{max} - k_t x_1 - k_{on} x_1 x_2+k_{off} x_3+k_{ex} x_4   \\      
+\dot{{x}}_2 &=& -k_{on} x_1 x_2+k_{off} x_3+k_{ex} x_4   \\                          
+\dot{{x}}_3 &=&k_{on} x_1 x_2-k_{off} x_3- k_e x_3      \\                          
+\dot{{x}}_4 &=& k_e x_3-k_{ex} x_4-k_{di} x_4-k_{de} x_4  \\                          
+\dot{{x}}_5 &=& k_{di} x_4                               \\                           
+\dot{{x}}_6 &=& k_{de} x_4                             \\                             
+		{y}_2&=&\kappa_1 \left({x}_2 +2{x}_6\right)\\
+		{y}_1&=&\kappa_2\left({x}_3\right)\\
+		{y}_3&=&\kappa_3\left({x}_4 +{x}_5\right),		
+\end{eqnarray*}
+
+
+
+The complex regulation of this receptor is characterized by receptor mobilization, turnover and recycling. The rate constants correspond to (i) receptor turnover ($k_t$), (ii) ligand-receptor binding ($k_{on}$) or dissociation ($k_{off}$), (iii) ligand-induced endocytosis ($k_e$), (iv) recycling ($k_{ex}$) and (v) internal ($k_{di}$) or external ($k_{de}$) degradation of Epo. Only the the Epo concentration in medium ($y_1$), on surface ($y_2$) and in cells ($y_3$) can be measured up to some scaling paramters $\kappa_j,\, j\in \{1,2,3\}$.  
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+\begin{align*}	
+\dot{\vec{x}} =&  \underbrace{\left(\begin{array}{c}
+k_{t} B_{max} - k_t x_1 - k_{on} x_1 x_2+k_{off} x_3+k_{ex} x_4 \\ 
+-k_{on} x_1 x_2+k_{off} x_3+k_{ex} x_4\\ 
+k_{on} x_1 x_2-k_{off} x_3- k_e x_3\\ 
+k_e x_3-k_{ex} x_4-k_{di} x_4-k_{de} x_4\\ 
+k_{di} x_4\\ 
+k_{de} x_4 \\ 
+\end{array} \right)}_{\vec{f} \left( \vec{x}, \vec{u} \right)}
+\begin{array}{l}
+\text{EpoR}\\
+\text{Epo}\\
+\text{Epo-EpoR}\\
+\text{Epo-EpoR}_i\\
+\text{dEpo}_i \\
+\text{dEpo}_e 
+\end{array} \\
+%
+\vec{y} 		  =& \underbrace{\left(\begin{array}{c}
+\kappa_1 \left({x}_2 +2{x}_6\right)\\
+\kappa_2\left({x}_3\right)\\
+\kappa_3\left({x}_4 +{x}_5\right)
+\end{array} \right)}_{\vec{h}\left(\vec{x}\right)}
+\begin{array}{l}
+\text{Epo + dEpo}_i\\
+\text{Epo-EpoR} \\
+\text{Epo-EpoR}_i + \text{dEpo}_i\\
+\end{array}\\
+\end{align*}
+
+\end{@twocolumnfalse}
+]
+
+\appendix
+
+\section{Appendix name}
+
+
+%\section*{References}
+\bibliographystyle{vancouver}
+%\addcontentsline{toc}{section}{\refname}
+\bibliography{RefsDAinSysMathBiol}
+
+
+\end{document}
